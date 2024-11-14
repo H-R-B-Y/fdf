@@ -12,10 +12,10 @@
 
 #include "../../include/fdf.h"
 
-t_vec3	vec3_rotate_matrix(t_vec3 *vec, void *param);
-t_vec2	vec2_rotate_matrix(t_vec2 *vec, void *param);
-t_vec3	vec3_default_translate(t_vec3 *vec, void *param);
-t_vec2	vec2_default_translate(t_vec2 *vec, void *param);
+// t_vec3	vec3_rotate_matrix(t_vec3 *vec, void *param);
+// t_vec2	vec2_rotate_matrix(t_vec2 *vec, void *param);
+// t_vec3	vec3_default_translate(t_vec3 *vec, void *param);
+// t_vec2	vec2_default_translate(t_vec2 *vec, void *param);
 
 t_vec3	vec3_rotate_matrix(t_vec3 *vec, void *param)
 {

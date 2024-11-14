@@ -46,8 +46,9 @@ t_proj	*create_isometric(void)
 	append_frame(output, create_tframe(TRVEC3X, vec3_rotate_matrix, mtrx, 1));
 	// Rotate x axis by α (ascsin(tan(30 degrees)))
 	mtrx = malloc(sizeof(t_mtrx3));
-	*mtrx = euler_to_mtrx3(asin(cos(30)), 0, 0);
+	*mtrx = euler_to_mtrx3(asin(cos(30 * MY_PI / 180)), 0, 0);
 	append_frame(output, create_tframe(TRVEC3X, vec3_rotate_matrix, mtrx, 1));
 	// Then convert to vec2
 	output->convert = iso_project;
+	return (output);
 }

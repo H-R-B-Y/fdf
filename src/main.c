@@ -60,5 +60,10 @@ int	main(int argc, char **argv)
 		close_sim(code, fdf);
 	fdf->projection = create_isometric();
 	project(fdf->map, fdf->projection);
-	return (0);
+	fdf->mlx = mlx_init(1920, 1080 , "F D F", 0);
+	fdf->main_img = mlx_new_image(fdf->mlx, 1920, 1080);
+	fdf->pre_img = mlx_new_image(fdf->mlx, 1920, 1080);
+	mlx_key_hook(fdf->mlx, main_key_hook, fdf);
+	// Draw loop goes here.
+	close_sim(0, fdf);
 }
