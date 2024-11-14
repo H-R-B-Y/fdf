@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hb_matrix32.c                                      :+:      :+:    :+:   */
+/*   maprange.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbreeze <hbreeze@student.42.fr>            #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-11-13 17:58:02 by hbreeze           #+#    #+#             */
-/*   Updated: 2024-11-13 17:58:02 by hbreeze          ###   ########.fr       */
+/*   Created: 2024-11-14 20:11:21 by hbreeze           #+#    #+#             */
+/*   Updated: 2024-11-14 20:11:21 by hbreeze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/hb_math_ext.h"
+#include "../../include/hb_math_ext.h"
 
-t_mtrx3	scaling_matrix_3d(float scale_x, float scale_y, float scale_z)
+float	maprange(t_vec2 *from, t_vec2 *too, float t)
 {
-	return((t_mtrx3){
-		{scale_x, 0, 0},
-		{0, scale_y, 0},
-		{0, 0, scale_z}
-	});
+	float	tn;
+
+	tn = (t - from->x) / (from->y - from->x);
+	return (too->x + tn * (too->y - too->x));
 }

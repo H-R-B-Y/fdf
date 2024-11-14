@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/hb_math_ext.h"
+#include "../../include/hb_math_ext.h"
 
 t_vec3	vec3_mtrx3(t_vec3 *vec, t_mtrx3 *mtrx)
 {
@@ -39,20 +39,20 @@ t_mtrx3	mtrx_mult(t_mtrx3 *m1, t_mtrx3 *m2)
 t_mtrx3	euler_to_mtrx3(float x, float y, float z)
 {
 	t_mtrx3	rot;
+	t_vec3	angles;
 
-	rot.x.x = cos(y) * cos(z);
-	rot.x.y = cos(y) * sin(z);
-	rot.x.z = -sin(y);
-	rot.y.x = sin(x) * sin(y) * cos(z)
-		- cos(x) * sin(z);
-	rot.y.y = sin(x) * sin(y) * sin(z)
-		+ cos(x) * cos(z);
-	rot.y.z = sin(x) * cos(y);
-	rot.z.x = cos(x) * sin(y) * cos(z)
-		+ sin(x) * sin(z);
-	rot.z.y = cos(x) * sin(y) * sin(z)
-		- sin(x) * cos(z);
-	rot.z.z = cos(x) * cos(y);
+	angles.x = x * MY_PI / 180.0;
+	angles.y = y * MY_PI / 180.0;
+	angles.z = z * MY_PI / 180.0;
+	rot.x.x = cos(angles.y) * cos(angles.z);
+	rot.x.y = cos(angles.y) * sin(angles.z);
+	rot.x.z = -sin(angles.y);
+	rot.y.x = sin(angles.x) * sin(angles.y) * cos(angles.z) - cos(angles.x) * sin(angles.z);
+	rot.y.y = sin(angles.x) * sin(angles.y) * sin(angles.z) + cos(angles.x) * cos(angles.z);
+	rot.y.z = sin(angles.x) * cos(angles.y);
+	rot.z.x = cos(angles.x) * sin(angles.y) * cos(angles.z) + sin(angles.x) * sin(angles.z);
+	rot.z.y = cos(angles.x) * sin(angles.y) * sin(angles.z) - sin(angles.x) * cos(angles.z);
+	rot.z.z = cos(angles.x) * cos(angles.y);
 	return (rot);
 }
 

@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hb_vec32.c                                         :+:      :+:    :+:   */
+/*   colour_get.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbreeze <hbreeze@student.42.fr>            #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-11-13 17:36:19 by hbreeze           #+#    #+#             */
-/*   Updated: 2024-11-13 17:36:19 by hbreeze          ###   ########.fr       */
+/*   Created: 2024-11-14 20:14:19 by hbreeze           #+#    #+#             */
+/*   Updated: 2024-11-14 20:14:19 by hbreeze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/hb_math_ext.h"
+#include "../../include/hb_math_ext.h"
 
-t_vec3	vec3_mult(t_vec3 *vec1, t_vec3 *vec2)
+__uint8_t	rgba_get_red(__uint32_t colour)
 {
-	t_vec3	result;
+	return ((colour & 0xFF000000) >> 24);
+}
 
-	if (!vec1 || !vec2)
-		return ((t_vec3){0, 0, 0});
-	result.x = vec1->x * vec2->x;
-	result.y = vec1->y * vec2->y;
-	result.z = vec1->z * vec2->z;
-	return (result);
+__uint8_t	rgba_get_green(__uint32_t colour)
+{
+	return ((colour & 0x00FF0000) >> 16);
+
+}
+
+__uint8_t	rgba_get_blue(__uint32_t colour)
+{
+	return ((colour & 0x0000FF00) >> 8);
+
+}
+
+__uint8_t	rgba_get_alph(__uint32_t colour)
+{
+	return (colour & 0x000000FF);
 }

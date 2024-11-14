@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/hb_math_ext.h"
+#include "../../include/hb_math_ext.h"
 
 float	vec2_mag(t_vec2 *vec)
 {

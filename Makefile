@@ -17,7 +17,16 @@ LIBMLX			:= $(LIBMLX_DIR)/build/libmlx42.a
 LIBFLAGS		:=  -ldl `pkg-config --libs glfw3` -pthread -lm
 
 SRC_DIR			:= ./src
-SRCS			:=
+SRCS			:= $(SRC_DIR)/parse/parse_validate.c \
+				$(SRC_DIR)/parse/parse_data.c \
+				$(SRC_DIR)/parse/parse_file.c \
+				$(SRC_DIR)/parse/parse_util.c \
+				$(SRC_DIR)/parse/parse.c \
+				$(SRC_DIR)/project/execute_pipeline.c \
+				$(SRC_DIR)/project/isometric.c \
+				$(SRC_DIR)/project/projection_defaults.c \
+				$(SRC_DIR)/project/projections.c \
+				$(SRC_DIR)/utility.c
 
 OBJS			:= ${SRCS:.c=.o}
 
@@ -32,7 +41,7 @@ $(LIBMLX):
 		cmake $(LIBMLX_DIR) -B $(LIBMLX_DIR)/build && make CFLAGS="$(CFLAGS)" -C $(LIBMLX_DIR)/build -j4
 
 $(HB_MATH):
-		$(MAKE) --directory $(HB_MATH_DIR) make CFLAGS=$(CFLAGS)
+		$(MAKE) --directory $(HB_MATH_DIR) all CFLAGS="$(CFLAGS)"
 
 .c.o:
 		$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)

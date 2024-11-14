@@ -99,4 +99,28 @@ t_mtrx3	mtrx3_identity(void);
 t_mtrx3	mtrx3_transpose(t_mtrx3 *mtrx);
 t_mtrx3	scaling_matrix_3d(float scale_x, float scale_y, float scale_z);
 
+// ███    ███ ██ ███████  ██████ 
+// ████  ████ ██ ██      ██      
+// ██ ████ ██ ██ ███████ ██      
+// ██  ██  ██ ██      ██ ██      
+// ██      ██ ██ ███████  ██████ 
+
+float	lerp(float start, float end, float t);
+
+// Note: x is start, y is end.
+float	maprange(t_vec2 *from, t_vec2 *too, float t);
+
+//  ██████  ██████  ██       ██████  ██    ██ ██████  
+// ██      ██    ██ ██      ██    ██ ██    ██ ██   ██ 
+// ██      ██    ██ ██      ██    ██ ██    ██ ██████  
+// ██      ██    ██ ██      ██    ██ ██    ██ ██   ██ 
+//  ██████  ██████  ███████  ██████   ██████  ██   ██ 
+
+__uint8_t	rgba_get_red(__uint32_t colour);
+__uint8_t	rgba_get_green(__uint32_t colour);
+__uint8_t	rgba_get_blue(__uint32_t colour);
+__uint8_t	rgba_get_alph(__uint32_t colour);
+
+__uint32_t	colour_rgba(__uint8_t red, __uint8_t green, __uint8_t blue, __uint8_t alpha);
+
 #endif

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/hb_math_ext.h"
+#include "../../include/hb_math_ext.h"
 
 t_vec2	vec2_mtrx2(t_vec2 *vec, t_mtrx2 *mtrx)
 {
@@ -42,8 +42,8 @@ t_mtrx2	euler_to_mtrx2(float euler)
 	float	cos_theta;
 	float	sin_theta;
 
-	cos_theta = cos(euler);
-	sin_theta = sin(euler);
+	cos_theta = cos(euler * MY_PI / 180);
+	sin_theta = sin(euler * MY_PI / 180);
 	rot.x.x = cos_theta;
 	rot.x.y = -sin_theta;
 	rot.y.x = sin_theta;
