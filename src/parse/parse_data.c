@@ -27,8 +27,8 @@ t_point	*point_str(int x, int y, char *str)
 		*post = '\0';
 		post = post + 1;
 	}
-	output->origin = (t_vec3){.x = x, .y = y,
-		.z = ft_atoi(str)};
+	output->origin = (t_vec3){.x = x, .z = y,
+		.y = ft_atoi(str)};
 	output->output = (t_vec2){0, 0};
 	output->colour = 0; // need to convert str to uint32 thingy here
 	return (output);
@@ -58,6 +58,7 @@ t_point	***generate_point_matrix(t_list *lines)
 			matrix[y][x] = point_str(x, y, chunks[x]);
 			x++;
 		}
+		delete_chunks(chunks);
 		lines = lines->next;
 		y++;
 	}
@@ -80,29 +81,29 @@ t_line	*new_line(t_point *start, t_point *end)
 
 t_line	**generate_line_array(t_map *map)
 {
-	int		x;
-	int		y;
+	t_vec3	i;
 	t_line	**arr;
-	int		i;
 
-	y = 0;
-	i = 0;
-	arr = malloc(sizeof(t_line *) * (((map->size.x - 1) * map->size.x)
-			 + ((map->size.y - 1) * map->size.y)));
+	i = (t_vec3){0, 0, 0};
+	map->ln_count = (((map->size.x - 1) * map->size.y)
+		+ ((map->size.y - 1) * map->size.x));
+	arr = malloc(sizeof(t_line *) * map->ln_count);
 	if (!arr)
 		return (0);
-	while (y < map->size.y)
+	while (i.y < map->size.y)
 	{
-		x = 0;
-		while (x < map->size.x)
+		i.x = 0;
+		while (i.x < map->size.x)
 		{
-			if (x + 1 != map->size.x)
-				arr[i++] = new_line(map->matrix[y][x], map->matrix[y][x+1]);
-			if (y + 1 != map->size.y)
-				arr[i++] = new_line(map->matrix[y][x], map->matrix[y+1][x]);
-			x++;
+			if (i.x + 1 != map->size.x)
+				arr[(int)i.z++] = new_line(map->matrix[(int)i.y][(int)i.x]
+					, map->matrix[(int)i.y][(int)i.x+1]);
+			if (i.y + 1 != map->size.y)
+				arr[(int)i.z++] = new_line(map->matrix[(int)i.y][(int)i.x]
+					, map->matrix[(int)i.y+1][(int)i.x]);
+			i.x++;
 		}
-		y++;
+		i.y++;
 	}
 	return (arr);
 }

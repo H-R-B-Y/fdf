@@ -1,5 +1,7 @@
 {
 	"files.associations": {
-		"hb_math_ext.h": "c"
-	}
+		"hb_math_ext.h": "c",
+		"fdf.h": "c"
+	},
+	"makefile.configureOnOpen": false
 }

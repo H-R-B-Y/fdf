@@ -32,7 +32,7 @@
 		"type": "cppdbg",
 		"request": "launch",
 		"program": "${workspaceRoot}/fdf.out",
-		"args": ["/home/herb/42work/fdf/maps/test_maps/10-2.fdf"],
+		"args": ["/home/herb/42work/fdf/maps/test_maps/42.fdf"],
 		"stopAtEntry": false,
 		"cwd": "${workspaceRoot}",
 		"environment": [],

@@ -12,7 +12,8 @@
 
 #include "../../include/fdf.h"
 
-t_tframe	*create_tframe(enum e_fntype type, void *func, void *param, int freeable)
+t_tframe	*create_tframe(enum e_fntype type,
+	void *func, void *param, int freeable)
 {
 	t_tframe	*output;
 
@@ -35,9 +36,6 @@ t_tframe	*create_tframe(enum e_fntype type, void *func, void *param, int freeabl
 	return (output);
 }
 
-void	destroy_projection(t_proj *proj);
-void	destroy_frame(t_tframe *frame);
-
 // Should be better protected
 int		append_frame(t_proj *proj, t_tframe *frame)
 {
@@ -47,5 +45,16 @@ int		append_frame(t_proj *proj, t_tframe *frame)
 		ft_lstadd_back(&proj->translate_2D, ft_lstnew(frame));
 	else if (frame->type == TRVEC3 || frame->type == TRVEC3X)
 		ft_lstadd_back(&proj->translate_3D, ft_lstnew(frame));
+	return (1);
+}
+
+int		prepend_frame(t_proj *proj, t_tframe *frame)
+{
+	if (!proj || !frame)
+		return (0);
+	if (frame->type == TRVEC2 || frame->type == TRVEC2X)
+		ft_lstadd_front(&proj->translate_2D, ft_lstnew(frame));
+	else if (frame->type == TRVEC3 || frame->type == TRVEC3X)
+		ft_lstadd_front(&proj->translate_3D, ft_lstnew(frame));
 	return (1);
 }

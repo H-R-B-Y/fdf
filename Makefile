@@ -1,6 +1,6 @@
 NAME			:= fdf.out
-# CFLAGS			:= -Wextra -Wall -Werror -g3 -O0 -fsanitize=address
-CFLAGS			:= -g3 -O0 -fsanitize=address
+CFLAGS			:= -Wextra -Wall -Werror -g3 -O0 -fsanitize=address
+#CFLAGS			:= -g3 -O0 -fsanitize=address
 
 HEADERS			:= -I ./include
 
@@ -22,10 +22,15 @@ SRCS			:= $(SRC_DIR)/parse/parse_validate.c \
 				$(SRC_DIR)/parse/parse_file.c \
 				$(SRC_DIR)/parse/parse_util.c \
 				$(SRC_DIR)/parse/parse.c \
+				$(SRC_DIR)/parse/map_delete.c \
 				$(SRC_DIR)/project/execute_pipeline.c \
 				$(SRC_DIR)/project/isometric.c \
 				$(SRC_DIR)/project/projection_defaults.c \
+				$(SRC_DIR)/project/projection_defaults2.c \
 				$(SRC_DIR)/project/projections.c \
+				$(SRC_DIR)/project/delete_pipeline.c \
+				$(SRC_DIR)/draw/draw_line.c \
+				$(SRC_DIR)/draw/draw_loop.c \
 				$(SRC_DIR)/utility.c
 
 OBJS			:= ${SRCS:.c=.o}

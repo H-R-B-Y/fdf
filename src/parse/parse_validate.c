@@ -51,7 +51,6 @@ int	chunk_is_valid(char *chunk)
 
 int	chunks_is_int(char **chunks)
 {
-	size_t	size;
 	int		index;
 
 	index = 0;
@@ -69,9 +68,7 @@ int	validate_map(t_list *map)
 {
 	size_t	last_len;
 	char	**chunks;
-	size_t	index;
 
-	index = 0;
 	chunks = ft_split(map->content, ' ');
 	last_len = array_len(chunks);
 	if (!chunks_is_int(chunks) && (delete_chunks(chunks), 1))
