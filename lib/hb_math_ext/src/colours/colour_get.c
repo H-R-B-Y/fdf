@@ -20,13 +20,11 @@ __uint8_t	rgba_get_red(__uint32_t colour)
 __uint8_t	rgba_get_green(__uint32_t colour)
 {
 	return ((colour & 0x00FF0000) >> 16);
-
 }
 
 __uint8_t	rgba_get_blue(__uint32_t colour)
 {
 	return ((colour & 0x0000FF00) >> 8);
-
 }
 
 __uint8_t	rgba_get_alph(__uint32_t colour)

@@ -14,7 +14,7 @@
 
 t_mtrx3	scaling_matrix_3d(float scale_x, float scale_y, float scale_z)
 {
-	return((t_mtrx3){
+	return ((t_mtrx3){
 		{scale_x, 0, 0},
 		{0, scale_y, 0},
 		{0, 0, scale_z}

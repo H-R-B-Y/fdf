@@ -13,7 +13,7 @@
 #include "../../include/fdf.h"
 
 void	delete_chunks(char **chunks);
-int	str_is_int(char *str);
+int		str_is_int(char *str);
 
 size_t	array_len(char **chunks)
 {
@@ -27,13 +27,13 @@ size_t	array_len(char **chunks)
 
 int	chunk_is_valid(char *chunk)
 {
-	char *post;
+	char	*post;
 
 	post = ft_strchr(chunk, ',');
 	if (post)
 	{
 		post[0] = '\0';
-		post = post + 1;
+		post = post + 3;
 		if (!str_is_int(chunk))
 			return (0);
 		while (*post != '\0')
@@ -77,7 +77,7 @@ int	validate_map(t_list *map)
 	while (map)
 	{
 		chunks = ft_split(map->content, ' ');
-		if (array_len(chunks) != last_len 
+		if (array_len(chunks) != last_len
 			|| !chunks_is_int(chunks))
 		{
 			delete_chunks(chunks);

@@ -16,7 +16,7 @@ t_vec3	vec3_rotate_matrix(t_vec3 *vec, void *param);
 
 t_vec2	iso_project(t_vec3 *vec, void *param)
 {
-	t_vec2	output;
+
 	t_vec3	middle;
 	t_mtrx3	rot;
 
@@ -24,9 +24,7 @@ t_vec2	iso_project(t_vec3 *vec, void *param)
 	rot = mtrx3_identity();
 	rot.z.z = 0.0f;
 	middle = vec3_mtrx3(vec, &rot);
-	output.x = middle.x;
-	output.y = middle.y;
-	return (output);
+	return ((t_vec2){middle.x, middle.y});
 }
 
 // First steps of isometric projection are:
@@ -35,16 +33,18 @@ t_vec2	iso_project(t_vec3 *vec, void *param)
 // Then convert to vec2
 t_proj	*create_isometric(void)
 {
-	t_proj *output;
-	t_mtrx3 *mtrx;
+	t_proj	*output;
+	t_mtrx3	*mtrx;
 
 	output = zeroit(malloc(sizeof(t_proj)), sizeof(t_proj));
 	mtrx = malloc(sizeof(t_mtrx3));
 	*mtrx = euler_to_mtrx3(0, 35.264, 0);
 	append_frame(output, create_tframe(TRVEC3X, vec3_rotate_matrix, mtrx, 1));
+	// append_frame(output, create_tframe(TRVEC3, spherical_projection, 0, 0));
 	mtrx = malloc(sizeof(t_mtrx3));
 	*mtrx = euler_to_mtrx3(45, 0, 0);
 	append_frame(output, create_tframe(TRVEC3X, vec3_rotate_matrix, mtrx, 1));
+	// append_frame(output, create_tframe(TRVEC3, vec3_norm, 0, 0));
 	output->convert = iso_project;
 	return (output);
 }

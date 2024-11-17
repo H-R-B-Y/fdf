@@ -31,14 +31,10 @@ t_vec2	vec2_norm(t_vec2 *vec)
 	float	mag;
 
 	if (!vec)
-		return ((t_vec2){0,0});
+		return ((t_vec2){0, 0});
 	mag = vec2_mag(vec);
-	return (
-		(t_vec2){
-			.x = (vec->x / mag),
-			.y = (vec->y / mag)
-		}
-	);
+	return ((t_vec2){.x = (vec->x / mag),
+		.y = (vec->y / mag)});
 }
 
 t_vec2	vec2_add(t_vec2 *vec1, t_vec2 *vec2)
@@ -46,13 +42,13 @@ t_vec2	vec2_add(t_vec2 *vec1, t_vec2 *vec2)
 	if (!vec1 || !vec2)
 		return ((t_vec2){0, 0});
 	return ((t_vec2){.x = vec1->x + vec2->x,
-			.y = vec1->y + vec2->y});
+		.y = vec1->y + vec2->y});
 }
 
 t_vec2	vec2_euler(t_vec2 *vec, float angle)
 {
-	t_vec2 rotated;
-	float radians;
+	t_vec2	rotated;
+	float	radians;
 
 	if (!vec)
 		return ((t_vec2){0, 0});

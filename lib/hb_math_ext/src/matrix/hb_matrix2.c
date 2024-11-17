@@ -26,7 +26,7 @@ t_vec2	vec2_mtrx2(t_vec2 *vec, t_mtrx2 *mtrx)
 t_mtrx2	mtrx2_mult(t_mtrx2 *m1, t_mtrx2 *m2)
 {
 	t_mtrx2	result;
-	
+
 	if (!m1 || !m2)
 		return (mtrx2_identity());
 	result.x.x = m1->x.x * m2->x.x + m1->x.y * m2->y.x;

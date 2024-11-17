@@ -16,20 +16,24 @@ void	_draw_point(mlx_image_t *img,
 			t_vec2 center, float thickness,
 			uint32_t colour)
 {
-	int	radius = thickness / 2;
+	int	radius;
 	int	dx[2];
 
+	radius = thickness / 2;
 	dx[0] = -radius;
 	while (dx[0] <= radius)
 	{
 		dx[1] = -radius;
-		while(dx[1] <= radius)
+		while (dx[1] <= radius)
 		{
 			dx[1]++;
 			if ((dx[0] * dx[0]) + (dx[1] * dx[1]) <= radius * radius)
-				if ((center.x + dx[0]) < img->width && (center.y + dx[1]) < img->height
-					&& (center.x + dx[0]) > 0 && (center.y + dx[1]) > 0)
-					mlx_put_pixel(img, (center.x + dx[0]), (center.y + dx[1]), colour);
+				if ((center.x + dx[0]) < img->width
+					&& (center.y + dx[1]) < img->height
+					&& (center.x + dx[0]) > 0
+					&& (center.y + dx[1]) > 0)
+					mlx_put_pixel(img, (center.x + dx[0]),
+						(center.y + dx[1]), colour);
 		}
 		dx[0]++;
 	}
@@ -37,12 +41,35 @@ void	_draw_point(mlx_image_t *img,
 
 void	draw_ln_point(mlx_image_t *img,
 	t_vec2 pt,
-	float thickness)
+	float thickness,
+	t_line *ln)
 {
-	uint32_t	colour;
+	uint32_t	colour1;
+	uint32_t	colour2;
 
-	colour = 0x000000FF;
-	_draw_point(img, pt, thickness, colour);
+	colour1 = ln->start->colour;
+	colour2 = ln->end->colour;
+	colour1 = lerp_colour(colour1, colour2,
+			normalize(0, vec2_distance(ln->startv, ln->endv),
+				vec2_distance(ln->startv, &pt)));
+	colour1 = colour_rgba(
+			rgba_get_red(colour1),
+			rgba_get_green(colour1),
+			rgba_get_blue(colour1),
+			0xFF);
+	_draw_point(img, pt, thickness, colour1);
+}
+
+t_vec2	_make_s(t_line *ln)
+{
+	t_vec2	v;
+
+	v = (t_vec2){-1, -1};
+	if (ln->startv->x < ln->endv->x)
+		v.x = 1;
+	if (ln->startv->y < ln->endv->y)
+		v.y = 1;
+	return (v);
 }
 
 void	draw_line(t_line *ln,
@@ -51,25 +78,26 @@ void	draw_line(t_line *ln,
 {
 	t_vec2	d;
 	t_vec2	s;
-	double err;
-	double e2;
-	t_vec2	start;
-	
-	(void)thickness;
-	start = *ln->startv;
-	d = (t_vec2){fabs(ln->endv->x - ln->startv->x), fabs(ln->endv->y - ln->startv->y)};
-	s = (t_vec2){(ln->startv->x < ln->endv->x) ? 1 : -1, (ln->startv->y < ln->endv->y) ? 1 : -1};
+	double	err;
+	double	e2;
+	t_vec2	st;
+
+	st = *ln->startv;
+	d = (t_vec2){fabs(ln->endv->x - ln->startv->x),
+		fabs(ln->endv->y - ln->startv->y)};
+	s = _make_s(ln);
 	err = d.x - d.y;
-	while (1) {
-		if (fabs(start.x - ln->endv->x) < 1 && fabs(start.y - ln->endv->y) < 1)
-			break;
-		if (start.x < img->width && start.y < img->height
-			&& start.x >= 1 && start.y >= 1)
-			draw_ln_point(img, start, thickness);
+	while (1)
+	{
+		if (fabs(st.x - ln->endv->x) < 1 && fabs(st.y - ln->endv->y) < 1)
+			break ;
+		if (st.x < img->width && st.y < img->height
+			&& st.x >= 1 && st.y >= 1)
+			draw_ln_point(img, st, thickness, ln);
 		e2 = 2 * err;
 		err -= (d.y * (e2 > -d.y));
-		start.x += (s.x * (e2 > -d.y));
+		st.x += (s.x * (e2 > -d.y));
 		err += (d.x * (e2 < d.x));
-		start.y += (s.y * (e2 < d.x));
+		st.y += (s.y * (e2 < d.x));
 	}
 }

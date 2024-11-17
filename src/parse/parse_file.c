@@ -33,7 +33,7 @@ t_list	*read_lines(int fd)
 
 	current_line = get_next_line(fd);
 	list = 0;
-	while(current_line)
+	while (current_line)
 	{
 		if (current_line[ft_strlen(current_line) - 1] == '\n')
 			current_line[ft_strlen(current_line) - 1] = '\0';

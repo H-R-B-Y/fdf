@@ -14,7 +14,7 @@
 
 t_vec3	vec3_mtrx3(t_vec3 *vec, t_mtrx3 *mtrx)
 {
-	t_vec3 result;
+	t_vec3	result;
 
 	if (!vec || !mtrx)
 		return ((t_vec3){0, 0, 0});
@@ -47,11 +47,15 @@ t_mtrx3	euler_to_mtrx3(float x, float y, float z)
 	rot.x.x = cos(angles.y) * cos(angles.z);
 	rot.x.y = cos(angles.y) * sin(angles.z);
 	rot.x.z = -sin(angles.y);
-	rot.y.x = sin(angles.x) * sin(angles.y) * cos(angles.z) - cos(angles.x) * sin(angles.z);
-	rot.y.y = sin(angles.x) * sin(angles.y) * sin(angles.z) + cos(angles.x) * cos(angles.z);
+	rot.y.x = sin(angles.x) * sin(angles.y)
+		* cos(angles.z) - cos(angles.x) * sin(angles.z);
+	rot.y.y = sin(angles.x) * sin(angles.y)
+		* sin(angles.z) + cos(angles.x) * cos(angles.z);
 	rot.y.z = sin(angles.x) * cos(angles.y);
-	rot.z.x = cos(angles.x) * sin(angles.y) * cos(angles.z) + sin(angles.x) * sin(angles.z);
-	rot.z.y = cos(angles.x) * sin(angles.y) * sin(angles.z) - sin(angles.x) * cos(angles.z);
+	rot.z.x = cos(angles.x) * sin(angles.y)
+		* cos(angles.z) + sin(angles.x) * sin(angles.z);
+	rot.z.y = cos(angles.x) * sin(angles.y)
+		* sin(angles.z) - sin(angles.x) * cos(angles.z);
 	rot.z.z = cos(angles.x) * cos(angles.y);
 	return (rot);
 }

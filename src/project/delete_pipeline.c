@@ -14,7 +14,7 @@
 
 void	_destory_frame_wrapper(void *param)
 {
-	t_tframe *p;
+	t_tframe	*p;
 
 	p = param;
 	if (p->param_freeable)

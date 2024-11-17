@@ -12,11 +12,10 @@
 
 #include "../../include/fdf.h"
 
-void	_swap_imgs(t_fdf *fdf)
+void	swap_imgs(t_fdf *fdf)
 {
 	mlx_delete_image(fdf->mlx, fdf->main_img);
-	fdf->main_img = fdf->pre_img;
-	fdf->pre_img = mlx_new_image(fdf->mlx,
+	fdf->main_img = mlx_new_image(fdf->mlx,
 		fdf->mlx->width, fdf->mlx->height);
 	mlx_image_to_window(fdf->mlx, fdf->main_img, 0, 0);
 }
@@ -29,34 +28,36 @@ void	_draw_all(t_fdf *fdf)
 			fdf->main_img, fdf->thickness);
 		fdf->index++;
 	}
-	//_swap_imgs(fdf);
+	swap_imgs(fdf);
 	fdf->needs_draw = 0;
 }
 
 void	_stepped_draw(t_fdf *fdf)
 {
-	int draw_steps;
+	int	count;
 
-	draw_steps = 0;
-	while (fdf->index + draw_steps < fdf->map->ln_count
-		&& draw_steps < fdf->drawsteps)
+	count = 0;
+	while (fdf->index < fdf->map->ln_count)
 	{
-		draw_line(fdf->map->lines[fdf->index + draw_steps],
+		draw_line(fdf->map->lines[fdf->index],
 			fdf->main_img, fdf->thickness);
-		draw_steps++;
+		fdf->index++;
+		count++;
+		if (fdf->drawsteps && count >= fdf->drawsteps)
+			return ;
 	}
-	fdf->index += draw_steps;
-	if (fdf->index == fdf->map->ln_count - 1)
-		fdf->needs_draw = 0;
+	fdf->needs_draw = 0;
 }
 
-void	draw_loop(t_fdf *fdf)
+void	draw_loop(void *p)
 {
-	if (fdf->needs_draw)
-	{
-		if (fdf->drawsteps == 0)
-			_draw_all(fdf);
-		else
-			_stepped_draw(fdf);
-	}
+	t_fdf	*fdf;
+
+	fdf = p;
+	if (fdf->needs_project)
+		project_loop(fdf);
+	else if (fdf->needs_translate)
+		translate_loop(fdf);
+	else if (fdf->needs_draw)
+		_stepped_draw(fdf);
 }

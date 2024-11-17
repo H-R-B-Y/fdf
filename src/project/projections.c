@@ -37,7 +37,7 @@ t_tframe	*create_tframe(enum e_fntype type,
 }
 
 // Should be better protected
-int		append_frame(t_proj *proj, t_tframe *frame)
+int	append_frame(t_proj *proj, t_tframe *frame)
 {
 	if (!proj || !frame)
 		return (0);
@@ -48,7 +48,7 @@ int		append_frame(t_proj *proj, t_tframe *frame)
 	return (1);
 }
 
-int		prepend_frame(t_proj *proj, t_tframe *frame)
+int	prepend_frame(t_proj *proj, t_tframe *frame)
 {
 	if (!proj || !frame)
 		return (0);

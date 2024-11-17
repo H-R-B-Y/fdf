@@ -33,7 +33,7 @@ void	delete_matrix(t_point ***matrix, t_vec2 size)
 
 void	delete_lines(t_line **lines, size_t ln_count)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (i < ln_count)

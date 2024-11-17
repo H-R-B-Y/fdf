@@ -99,17 +99,37 @@ struct s_fdf
 {
 	mlx_t			*mlx;
 	mlx_image_t		*main_img;
-	mlx_image_t		*pre_img; // Maybe useful to re-draw to a new image, then display when ready instead of deleting then redrawing.
 	t_map			*map;
 	struct s_proj	*projection;
-	size_t			index;
+
 	int				needs_translate;
+	t_vec2			translate_index;
+
 	int				needs_project;
+	t_vec2			project_index;
+
 	int				needs_draw;
+	size_t			index;
+	
+	t_vec3			base_scale;
+	t_vec2			auto_center;
+	t_mtrx2			bbox;
+
 	uint32_t		default_colour;
 	float			thickness;
+
+	int				projsteps;
+	int				transteps;
 	int				drawsteps;
 };
+
+void	close_sim(int code, t_fdf *master);
+t_fdf	*init_fdf(char *path);
+
+void	set_drawsteps(t_fdf *fdf, int v);
+void	set_redraw(t_fdf *fdf);
+void	set_retranslate(t_fdf *fdf);
+void	set_reproject(t_fdf *fdf);
 
 // ██████   █████  ██████  ███████ ███████
 // ██   ██ ██   ██ ██   ██ ██      ██     
@@ -125,11 +145,12 @@ void	destroy_map(t_map **map);
 
 /**
  * @brief Parse map data int output.
- * @brief path The path to the map file.
- * @brief output The output map data.
+ * @param path The path to the map file.
+ * @param output The output map data.
+ * @param default_colour default point colour
  * @return 0 on success, an integer to describe the error.
  */
-int		parse_map(char *path, t_map **output);
+int		parse_map(char *path, t_map **output, uint32_t default_colour);
 
 // ██████  ██████   █████  ██     ██
 // ██   ██ ██   ██ ██   ██ ██     ██
@@ -246,31 +267,33 @@ t_vec2	vec2_rotate_matrix(t_vec2 *vec, void *param);
 t_vec3	vec3_default_translate(t_vec3 *vec, void *param);
 t_vec2	vec2_default_translate(t_vec2 *vec, void *param);
 t_vec3	vec3_change_scale(t_vec3 *vec, void *param);
-t_vec3 vec3_hadamard(t_vec3 *vec, void *param);
+t_vec3	vec3_hadamard(t_vec3 *vec, void *param);
 
-
+void	auto_center(t_fdf *fdf);
 
 /**
  * @brief Create the default isometric projection pipeline.
  */
 t_proj	*create_isometric(void);
 
-/**
- * @brief Runs the projection pipeline on the map data.
- * @param map The map data.
- * @param projection The projection pipeline.
- */
-void	project(t_map *map, t_proj *projection);
+// /**
+//  * @brief Runs the projection pipeline on the map data.
+//  * @param map The map data.
+//  * @param projection The projection pipeline.
+//  */
+// void	project(t_map *map, t_proj *projection);
+void	project_loop(t_fdf *fdf);
 
-/**
- * @brief Translate the map data using the projection pipeline.
- * @param map The map data.
- * @param projection The projection pipeline.
- * 
- * As opposed to the project function, this function 
- * 	only runs the 2d translation frames.
- */
-void	translate(t_map *map, t_proj *projection);
+// /**
+//  * @brief Translate the map data using the projection pipeline.
+//  * @param map The map data.
+//  * @param projection The projection pipeline.
+//  * 
+//  * As opposed to the project function, this function 
+//  * 	only runs the 2d translation frames.
+//  */
+// void	translate(t_map *map, t_proj *projection);
+void	translate_loop(t_fdf *fdf);
 
 /**
  * @brief Draw the line data.
@@ -280,7 +303,9 @@ void	translate(t_map *map, t_proj *projection);
  * 	steps of "drawsteps" lines per frame.
  * else it will draw all the lines at once.
  */
-void	draw_loop(t_fdf *fdf);
+void	draw_loop(void *p);
+
+void	swap_imgs(t_fdf *fdf);
 
 /**
  * @brief Draw a line.

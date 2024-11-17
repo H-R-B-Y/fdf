@@ -12,8 +12,8 @@
 
 #include "../../include/fdf.h"
 
-# define INT_MAX_STR "2147483647"
-# define INT_MIN_STR "-2147483648"
+#define INT_MAX_STR "2147483647"
+#define INT_MIN_STR "-2147483648"
 
 int	str_gt(char *s1, char *s2)
 {
@@ -49,7 +49,7 @@ int	str_is_int(char *str)
 	else
 	{
 		if (str[0] == '+')
-			 str = &(str[1]);
+			str = &(str[1]);
 		comp = ft_strlen(INT_MAX_STR);
 		test = ft_strlen(str);
 		if (test > comp || (test == comp && str_gt(str, INT_MAX_STR))

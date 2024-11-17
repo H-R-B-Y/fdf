@@ -35,13 +35,15 @@ t_vec3	vec3_norm(t_vec3 *vec)
 	float	mag;
 
 	if (!vec)
-		return ((t_vec3){0, 0, 0});
+		return (t_vec3){0, 0, 0};
 	mag = vec3_mag(vec);
-	return ((t_vec3){
+	if (mag < 1e-6f)
+		return (t_vec3){0, 0, 0};
+	return (t_vec3){
 		.x = (vec->x / mag),
 		.y = (vec->y / mag),
 		.z = (vec->z / mag)
-	});
+	};
 }
 
 t_vec3	vec3_add(t_vec3 *vec1, t_vec3 *vec2)

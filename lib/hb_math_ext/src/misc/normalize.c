@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   preojection_defaults2.c                            :+:      :+:    :+:   */
+/*   normalize.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbreeze <hbreeze@student.42.fr>            #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-11-15 16:01:17 by hbreeze           #+#    #+#             */
-/*   Updated: 2024-11-15 16:01:17 by hbreeze          ###   ########.fr       */
+/*   Created: 2024-11-15 18:29:00 by hbreeze           #+#    #+#             */
+/*   Updated: 2024-11-15 18:29:00 by hbreeze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/fdf.h"
+#include "../../include/hb_math_ext.h"
 
-t_vec3	vec3_hadamard(t_vec3 *vec, void *param)
+float	normalize(float from, float too, float t)
 {
-	t_vec3	out;
-
-	out = vec3_mult(vec, param);
-	return (out);
+	return ((t - from) / (too - from));
 }

@@ -27,3 +27,12 @@ t_vec2	vec2_mult(t_vec2 *vec1, t_vec2 *vec2)
 	result.y = vec1->y * vec2->y;
 	return (result);
 }
+
+float	vec2_distance(t_vec2 *vec1, t_vec2 *vec2)
+{
+	t_vec2	difference;
+
+	difference = vec2_smult(vec2, -1.0f);
+	difference = vec2_add(vec1, &difference);
+	return (vec2_mag(&difference));
+}

@@ -22,7 +22,7 @@ t_vec3	vec3_change_scale(t_vec3 *vec, void *param)
 {
 	float	scale;
 	t_vec3	val;
-	
+
 	scale = *((float *)param);
 	val = vec3_smult(vec, scale);
 	return (val);

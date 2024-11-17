@@ -13,7 +13,10 @@ SRCS			:= $(SRC_DIR)/vector/hb_vec2.c \
 				$(SRC_DIR)/matrix/hb_matrix3.c \
 				$(SRC_DIR)/matrix/hb_matrix32.c \
 				$(SRC_DIR)/misc/lerp.c \
-				$(SRC_DIR)/misc/maprange.c 
+				$(SRC_DIR)/misc/normalize.c \
+				$(SRC_DIR)/misc/maprange.c \
+				$(SRC_DIR)/colours/colour_get.c \
+				$(SRC_DIR)/colours/colour_rgba.c 
 
 OBJS			:= ${SRCS:.c=.o}
 

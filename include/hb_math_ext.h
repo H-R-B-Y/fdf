@@ -39,6 +39,7 @@ t_vec2	vec2_add(t_vec2 *vec1, t_vec2 *vec2);
 t_vec2	vec2_euler(t_vec2 *vec, float angle);
 t_vec2	vec2_smult(t_vec2 *vec, float scalar);
 t_vec2	vec2_mult(t_vec2 *vec1, t_vec2 *vec2);
+float	vec2_distance(t_vec2 *vec1, t_vec2 *vec2);
 
 // ██    ██ ███████  ██████ ██████  
 // ██    ██ ██      ██           ██ 
@@ -110,6 +111,8 @@ float	lerp(float start, float end, float t);
 // Note: x is start, y is end.
 float	maprange(t_vec2 *from, t_vec2 *too, float t);
 
+float	normalize(float from, float too, float t);
+
 //  ██████  ██████  ██       ██████  ██    ██ ██████  
 // ██      ██    ██ ██      ██    ██ ██    ██ ██   ██ 
 // ██      ██    ██ ██      ██    ██ ██    ██ ██████  
@@ -122,5 +125,9 @@ __uint8_t	rgba_get_blue(__uint32_t colour);
 __uint8_t	rgba_get_alph(__uint32_t colour);
 
 __uint32_t	colour_rgba(__uint8_t red, __uint8_t green, __uint8_t blue, __uint8_t alpha);
+__uint32_t	lerp_colour(__uint32_t from, __uint32_t too, float t);
+
+// Expects form 0x........
+__uint32_t	parse_rgba_str(const char *rgba);
 
 #endif
