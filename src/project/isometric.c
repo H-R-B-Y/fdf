@@ -38,12 +38,12 @@ t_proj	*create_isometric(void)
 
 	output = zeroit(malloc(sizeof(t_proj)), sizeof(t_proj));
 	mtrx = malloc(sizeof(t_mtrx3));
-	*mtrx = euler_to_mtrx3(0, 35.264, 0);
+	*mtrx = euler_to_mtrx3(45, 35.264, 0);
 	append_frame(output, create_tframe(TRVEC3X, vec3_rotate_matrix, mtrx, 1));
 	// append_frame(output, create_tframe(TRVEC3, spherical_projection, 0, 0));
-	mtrx = malloc(sizeof(t_mtrx3));
-	*mtrx = euler_to_mtrx3(45, 0, 0);
-	append_frame(output, create_tframe(TRVEC3X, vec3_rotate_matrix, mtrx, 1));
+	// mtrx = malloc(sizeof(t_mtrx3));
+	// *mtrx = euler_to_mtrx3(45, 0, 0);
+	// append_frame(output, create_tframe(TRVEC3X, vec3_rotate_matrix, mtrx, 1));
 	// append_frame(output, create_tframe(TRVEC3, vec3_norm, 0, 0));
 	output->convert = iso_project;
 	return (output);
