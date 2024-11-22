@@ -30,7 +30,7 @@ t_fdf	*init_fdf(char *path)
 	code = parse_map(path, &fdf->map, fdf->default_colour);
 	if (code)
 		close_sim(code, fdf);
-	fdf->base_scale = (t_vec3){5, -1, 5};
+	fdf->base_scale = (t_vec3){10, -5, 10};
 	fdf->mlx = mlx_init(1920, 1080 , "F D F", 1);
 	fdf->main_img = mlx_new_image(fdf->mlx, 1920, 1080);
 	mlx_image_to_window(fdf->mlx, fdf->main_img, 0, 0);

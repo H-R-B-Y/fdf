@@ -44,7 +44,7 @@ t_proj	*create_isometric(void)
 	// mtrx = malloc(sizeof(t_mtrx3));
 	// *mtrx = euler_to_mtrx3(45, 0, 0);
 	// append_frame(output, create_tframe(TRVEC3X, vec3_rotate_matrix, mtrx, 1));
-	// append_frame(output, create_tframe(TRVEC3, vec3_norm, 0, 0));
+	prepend_frame(output, create_tframe(TRVEC3, vec3_norm, 0, 0));
 	output->convert = iso_project;
 	return (output);
 }
