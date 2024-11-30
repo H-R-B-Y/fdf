@@ -57,19 +57,20 @@ int	main(int argc, char **argv)
 	if (argc < 1)
 		return (1);
 	fdf = init_fdf(argv[1]);
+	t_vec2 *offset = malloc(sizeof(t_vec2));
+	float *scale = malloc(sizeof(float));
+	// *scale = 1000.0f;
+	// offset->x = fdf->mlx->width/2;
+	// offset->y = fdf->mlx->height;
+	// t_vec3 *scale2 = malloc(sizeof(t_vec3));
+	// *scale2 = (t_vec3){1, -1, 1};
+	// append_frame(fdf->projection, create_tframe(TRVEC3X, vec3_change_scale, scale, 1));
+	// prepend_frame(fdf->projection, create_tframe(TRVEC2X, vec2_default_translate, offset, 1));
+	// append_frame(fdf->projection, create_tframe(TRVEC3X, vec3_hadamard, scale2, 1));
 	mlx_key_hook(fdf->mlx, main_key_hook, fdf);
 	mlx_loop_hook(fdf->mlx, draw_loop, fdf);
 	mlx_loop(fdf->mlx);
 	close_sim(0, fdf);
 }
 
-// t_vec2 *offset = malloc(sizeof(t_vec2));
-// float *scale = malloc(sizeof(float));
-// *scale = 1000.0f;
-// offset->x = fdf->mlx->width/2;
-// offset->y = fdf->mlx->height;
-// t_vec3 *scale2 = malloc(sizeof(t_vec3));
-// *scale2 = (t_vec3){1, -1, 1};
-// append_frame(fdf->projection, create_tframe(TRVEC3X, vec3_change_scale, scale, 1));
-// prepend_frame(fdf->projection, create_tframe(TRVEC2X, vec2_default_translate, offset, 1));
-// append_frame(fdf->projection, create_tframe(TRVEC3X, vec3_hadamard, scale2, 1));
+
